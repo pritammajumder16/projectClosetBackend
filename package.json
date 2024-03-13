@@ -4,8 +4,16 @@
   "description": "Backend for project closet",
   "main": "index.js",
   "scripts": {
+    "start": "set NODE_ENV=dev && nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "mongoose": "^8.2.1"
+  }
 }
