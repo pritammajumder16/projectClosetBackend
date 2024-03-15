@@ -32,10 +32,16 @@ if (cluster.isMaster) {
     });
   const app = express();
   app.use((req, res, next) => {
+    console.log("Request Arrived at:",req.url)
     res.set("Access-Control-Allow-Origin", "*");
-    res.set("Access-Control-Allow-Methods", ["PUT", "POST", "GET", "DELETE"]);
-    res.set("Access-Control-Allow-Headers", ["Content-Type", "Authorization"]);
+    res.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
+    res.set("Access-Control-Allow-Headers", "Content-Type,Authorization,Accept,User-Agent");
     next();
   });
-  middlewares(app);
+  try{
+    middlewares(app);
+
+  }catch(err){
+    console.log("Middleware error : ",err)
+  }
 }

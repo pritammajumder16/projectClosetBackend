@@ -1,5 +1,5 @@
 const Router = require("express").Router();
-const userModel = require("../models/userModel");
+const userModel = require("../../models/userModel");
 const bcrypt = require("bcrypt")
 Router.post("/signup", (req, res, next) => {
   const obj = {
@@ -11,6 +11,7 @@ Router.post("/signup", (req, res, next) => {
     isActive: true,
     createdTime: new Date().getTime(),
   };
+  console.log(obj)
   bcrypt.hash(obj.password,10).then(hash=>{
     obj.password=hash;
     const user = new userModel(obj);
