@@ -3,14 +3,15 @@ const mongoose = require("mongoose");
 const userSchema = mongoose.Schema({
     "userName": {type:String, required:true,},
 	"email": {type:String, required:true,unique:true},
-	"gender":{type:Number, required:true},
-	"phoneNumber":{type:Number, required:true},
-	"dateOfBirth" :{type:Number, required:true},
+	"gender":{type:String},
+	"dateOfBirth" :{type:Number},
 	"isActive": {type:Boolean, required:true},
 	"createdBy": {type:String},
 	"createdTime":{type:Number},
 	"updatedBy": {type:String},
 	"updatationTime": {type:Number},
+	"roleId":{type:Number, required:true},
+	"roleName":{type:String, required:true},
 	"password": {type:String, required:true}
 })
 

@@ -35,7 +35,7 @@ if (cluster.isMaster) {
     console.log("Request Arrived at:",req.url)
     res.set("Access-Control-Allow-Origin", "*");
     res.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
-    res.set("Access-Control-Allow-Headers", "Content-Type,Authorization,Accept,User-Agent");
+    res.set("Access-Control-Allow-Headers", "Content-Type,authorization,Accept,User-Agent,requestedby");
     next();
   });
   try{
