@@ -13,6 +13,7 @@ Router.post("/signup", (req, res, next) => {
     isActive: true,
     roleId:USER_ROLE_ID,
     roleName:USER,
+    cart:[],
     createdTime: new Date().getTime(),
   };
   console.log(obj);

@@ -12,7 +12,9 @@ const userSchema = mongoose.Schema({
 	"updatationTime": {type:Number},
 	"roleId":{type:Number, required:true},
 	"roleName":{type:String, required:true},
-	"password": {type:String, required:true}
+	"password": {type:String, required:true},
+	"cart":{type:Array,required:false},
+	"lastOrder":{type:Object,required:false}
 })
 
 
