@@ -6,7 +6,7 @@ const orderSchema = mongoose.Schema({
     totalAmount:{type:Number,required:true},
     createdBy:{type:String,required:true},
     status:{type:String,required:true},
-    shippingAddress:{type:String,required:true},
+    shippingAddress:{type:Object,required:true},
     creationTime:{type:Number},
     updatedBy:{type:String},
     updatationTime:{type:Number},

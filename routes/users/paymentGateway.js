@@ -15,7 +15,7 @@ const generateOrderId = ()=>{const timestamp = new Date().getTime().toString();
     return timestamp + randomString; 
    }
 paymentRouter.post("/initiatePayment", async function (req, res, next) {
-  if (!req.body.amount || !req.body.email) raiseError(res, { message: "Amount and email is required" });
+  if (!req.body.amount || !req.body.email || !req.body.shippingAddress) raiseError(res, { message: "Amount and email & address is required" });
   const orderId=generateOrderId()
 //   console.log(orderId)
   let normalPayLoad = {
@@ -31,7 +31,8 @@ paymentRouter.post("/initiatePayment", async function (req, res, next) {
       type: "PAY_PAGE",
     },
   };
-  await userModel.findOneAndUpdate({email:req.headers.requestedby},{$set:{lastOrder:{orderId,products:req.body.products,amount:req.body.amount}}})
+  console.log(req.body)
+  await userModel.findOneAndUpdate({email:req.headers.requestedby},{$set:{lastOrder:{orderId,products:req.body.products,amount:req.body.amount,shippingAddress:req.body.shippingAddress}}})
   let saltKey = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
   let saltIndex = 1;
   let bufferObj = Buffer.from(JSON.stringify(normalPayLoad), "utf8");
@@ -115,11 +116,11 @@ paymentRouter.post("/redirectUrl", async function (req, res) {
             status:"pending",
             createdBy:user.email,
             creationTime:new Date().getTime(),
-            shippingAddress:"my address"
+            shippingAddress:user.lastOrder.shippingAddress
           }
           const order = new orderModel(obj)
           order.save()
-          return res.redirect("http://localhost:4200/checkout")
+          return res.redirect("http://localhost:4200/orders")
         })
         .catch(function (error) {
           return raiseError(res, error);

@@ -1,8 +1,11 @@
 const addToCartRouter = require("express").Router();
-const { sendDataSuccess } = require("../../lib");
+const { sendDataSuccess, raiseError } = require("../../lib");
 const productModel = require("../../models/product");
 const userModel = require("../../models/userModel");
 addToCartRouter.post("/addToCart", async (req, res, next) => {
+  if(!req.body.productId ||!req.body.quantity || !req.body.price||!req.body.size){
+    raiseError(res,"productId, quantity, price and size are required")
+  }
     const obj ={$push:{cart:{productId:req.body.productId,quantity:req.body.quantity,price:(req.body.price*req.body.quantity)+100}}}
     const findObj = {email:req.headers.requestedby}
   const result = await userModel.findOneAndUpdate(findObj,obj)

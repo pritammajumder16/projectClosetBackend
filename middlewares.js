@@ -13,6 +13,8 @@ const productFetcher = require("./routes/unvfd/productFetch");
 const addToCartRouter = require("./routes/users/cart");
 const paymentRouter = require("./routes/users/paymentGateway");
 const orderRouter = require("./routes/users/orders");
+const pageInfoRouter = require("./routes/admin/productInfo");
+const reviewRouter = require("./routes/users/review");
 
 const middlewares = function (app) {
   app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,10 +29,12 @@ const middlewares = function (app) {
   //verification
   app.use(jwtVerification)
   //verification routes
+  app.use("/user",reviewRouter)
   app.use("/user",addToCartRouter)
   app.use("/user",orderRouter)
   app.use("/admin", categoryRouter)
   app.use("/admin",allCategoryRouter)
+  app.use("/admin",pageInfoRouter)
   app.use("/admin",productUpload)
   app.use("/admin",fetchFiles)
   app.use("/admin",userRoleUpdate)
