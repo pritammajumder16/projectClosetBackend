@@ -1,4 +1,7 @@
-const { sendDataSuccess, raiseError } = require("../../lib");
+const {
+  sendDataSuccess,
+  raiseError,
+} = require("../../utils/responseFunctions");
 const roleMatrixModel = require("../../models/roleMatrix");
 const userModel = require("../../models/userModel");
 const userRoleUpdate = require("express").Router();
