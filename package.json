@@ -1,7 +1,7 @@
 {
-  "name": "projectclosetbackend",
+  "name": "pritclosetbackend",
   "version": "1.0.0",
-  "description": "Backend for project closet",
+  "description": "Backend for prit closet",
   "main": "index.js",
   "scripts": {
     "start": "set NODE_ENV=dev && nodemon index.js",

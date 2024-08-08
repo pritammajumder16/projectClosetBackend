@@ -8,14 +8,9 @@ fetchFiles.get("/fetchFiles", async (req, res, next) => {
     });
   const files = JSON.parse(req.query.files);
   console.log(files);
-  
+
   return sendDataSuccess(res, { message: "Wait ok" });
 });
 module.exports = fetchFiles;
 
-
-
-
-
-
-``
+``;

@@ -5,7 +5,6 @@ const os = require("os");
 require("dotenv").config();
 const middlewares = require("./middlewares");
 
-
 if (cluster.isMaster) {
   const cpuCount = os.cpus().length;
   for (let i = 0; i < cpuCount; i++) {
@@ -32,18 +31,20 @@ if (cluster.isMaster) {
       console.log(err);
     });
   const app = express();
-  app.use('/uploads', express.static('uploads'));
+  app.use("/uploads", express.static("uploads"));
   app.use((req, res, next) => {
-    console.log("Request Arrived at:",req.url)
+    console.log("Request Arrived at:", req.url);
     res.set("Access-Control-Allow-Origin", "*");
-    res.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
-    res.set("Access-Control-Allow-Headers", "Content-Type,authorization,Accept,User-Agent,requestedby");
+    res.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS,DELETE,PUT");
+    res.set(
+      "Access-Control-Allow-Headers",
+      "Content-Type,authorization,Accept,User-Agent,requestedby"
+    );
     next();
   });
-  try{
+  try {
     middlewares(app);
-
-  }catch(err){
-    console.log("Middleware error : ",err)
+  } catch (err) {
+    console.log("Middleware error : ", err);
   }
 }

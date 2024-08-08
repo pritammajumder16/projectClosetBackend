@@ -1,8 +1,8 @@
 const Router = require("express").Router();
 const userModel = require("../../models/userModel");
 const bcrypt = require("bcrypt");
-const {USER,USER_ROLE_ID} = require("../../constants")
-const lib = require("../../lib")
+const { USER, USER_ROLE_ID } = require("../../constants");
+const { sendDataSuccess, raiseError } = require("../../lib");
 Router.post("/signup", (req, res, next) => {
   const obj = {
     userName: req.body.userName,
@@ -11,9 +11,9 @@ Router.post("/signup", (req, res, next) => {
     gender: req.body.gender,
     dateOfBirth: req.body.dateOfBirth,
     isActive: true,
-    roleId:USER_ROLE_ID,
-    roleName:USER,
-    cart:[],
+    roleId: USER_ROLE_ID,
+    roleName: USER,
+    cart: [],
     createdTime: new Date().getTime(),
   };
   console.log(obj);
@@ -25,16 +25,16 @@ Router.post("/signup", (req, res, next) => {
       user
         .save()
         .then((result) => {
-          return lib.sendDataSuccess(res,result)
+          return sendDataSuccess(res, result);
         })
         .catch((err) => {
-          if(err.code==11000)
-          return lib.sendDataSuccess(res,{emailExists:true},1,false)
-          return lib.raiseError(res,err)
+          if (err.code == 11000)
+            return sendDataSuccess(res, { emailExists: true }, 1, false);
+          return raiseError(res, err);
         });
     })
     .catch((err) => {
-      return lib.raiseError(res,err)
+      return raiseError(res, err);
     });
 });
 

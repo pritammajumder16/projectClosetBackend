@@ -22,21 +22,19 @@ const middlewares = function (app) {
   //non Verification Routes
   app.use("/auth", signUp);
   app.use("/auth", login);
-  app.use("/auth",roleMatrix)
-  app.use("/unvfd",unvfdCategoryRouter)
-  app.use("/unvfd",productFetcher)
-  app.use("/user",paymentRouter)
-  //verification
-  app.use(jwtVerification)
+  app.use("/auth", roleMatrix);
+  app.use("/unvfd", unvfdCategoryRouter);
+  app.use("/unvfd", productFetcher);
+  app.use("/user", paymentRouter);
   //verification routes
-  app.use("/user",reviewRouter)
-  app.use("/user",addToCartRouter)
-  app.use("/user",orderRouter)
-  app.use("/admin", categoryRouter)
-  app.use("/admin",allCategoryRouter)
-  app.use("/admin",pageInfoRouter)
-  app.use("/admin",productUpload)
-  app.use("/admin",fetchFiles)
-  app.use("/admin",userRoleUpdate)
+  app.use("/user", jwtVerification, reviewRouter);
+  app.use("/user", jwtVerification, addToCartRouter);
+  app.use("/user", jwtVerification, orderRouter);
+  app.use("/admin", jwtVerification, categoryRouter);
+  app.use("/admin", jwtVerification, allCategoryRouter);
+  app.use("/admin", jwtVerification, pageInfoRouter);
+  app.use("/admin", jwtVerification, productUpload);
+  app.use("/admin", jwtVerification, fetchFiles);
+  app.use("/admin", jwtVerification, userRoleUpdate);
 };
 module.exports = middlewares;

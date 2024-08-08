@@ -6,12 +6,12 @@ categoryRouter.get("/category", async (req, res, next) => {
   if (!req.query.categoryName) {
     return lib.raiseError(res, { message: "Category Name is required" });
   }
-  let obj = {}
-  console.log(req.query)
+  let obj = {};
+  console.log(req.query);
   if (!req.query.categoryId) {
-    const id = await sequenceGet(sequences.category)
+    const id = await sequenceGet(sequences.category);
     obj = {
-        categoryId: id,
+      categoryId: id,
       categoryName: req.query.categoryName,
       createdBy: req.headers.requestedby,
       creationTime: new Date().getTime(),
@@ -24,16 +24,22 @@ categoryRouter.get("/category", async (req, res, next) => {
       updationTime: new Date().getTime(),
     };
   }
-  console.log(obj)
-  const result = await categoryModel.findOneAndUpdate({categoryId:obj.categoryId},{$set:obj},{upsert:true});
-  return lib.sendDataSuccess(res,obj)
+  console.log(obj);
+  const result = await categoryModel.findOneAndUpdate(
+    { categoryId: obj.categoryId },
+    { $set: obj },
+    { upsert: true }
+  );
+  return lib.sendDataSuccess(res, obj);
 });
 
 categoryRouter.post("/categoryDelete", async (req, res, next) => {
   if (!req.body.categoryId) {
-    return lib.raiseError(res,{message:"Category ID required"})
+    return lib.raiseError(res, { message: "Category ID required" });
   }
-  const result = await categoryModel.deleteOne({categoryId:req.body.categoryId});
-  return lib.sendDataSuccess(res,result)
+  const result = await categoryModel.deleteOne({
+    categoryId: req.body.categoryId,
+  });
+  return lib.sendDataSuccess(res, result);
 });
 module.exports = categoryRouter;

@@ -2,7 +2,7 @@ const sequenceModel = require("./models/sequences");
 
 const sequences = {
   category: "category",
-  product: "product"
+  product: "product",
 };
 const sequenceGet = async (sequenceStr) => {
   try {
@@ -13,14 +13,16 @@ const sequenceGet = async (sequenceStr) => {
     );
 
     if (!updatedSequence) {
-      throw new Error(`Sequence document not found for sequence: ${sequenceStr}`);
+      throw new Error(
+        `Sequence document not found for sequence: ${sequenceStr}`
+      );
     }
 
     return updatedSequence[sequenceStr];
   } catch (error) {
-    console.error('Error while incrementing sequence:', error);
+    console.error("Error while incrementing sequence:", error);
     throw error; // Rethrow the error to handle it outside this function
   }
 };
 
-module.exports = { sequences ,sequenceGet};
+module.exports = { sequences, sequenceGet };
