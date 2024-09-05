@@ -21,10 +21,7 @@ if (cluster.isMaster) {
   });
 } else {
   mongoose
-    .connect(process.env.DB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    .connect(process.env.DB_URL)
     .then(() => {
       app.listen(process.env.PORT || 3000, () => {
         console.log(

@@ -3,7 +3,7 @@ const {
   sendDataSuccess,
   raiseError,
 } = require("../../utils/responseFunctions");
-const orderModel = require("../../models/orderModel");
+const orderModel = require("../../models/orderModel").default;
 
 orderRouter.get("/getOrders", async (req, res, next) => {
   try {

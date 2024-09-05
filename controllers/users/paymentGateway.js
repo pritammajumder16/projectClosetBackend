@@ -79,6 +79,7 @@ paymentRouter.post("/initiatePayment", async function (req, res, next) {
       );
     })
     .catch(function (error) {
+      console.log("error error error error", error);
       return raiseError(res, error);
     });
 });

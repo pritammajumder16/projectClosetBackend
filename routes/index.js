@@ -15,6 +15,7 @@ const paymentRouter = require("../controllers/users/paymentGateway");
 const orderRouter = require("../controllers/users/orders");
 const pageInfoRouter = require("../controllers/admin/productInfo");
 const reviewRouter = require("../controllers/users/review");
+const stripeRouter = require("../controllers/users/stripePayment");
 
 const routes = function (app) {
   // Middleware
@@ -28,6 +29,7 @@ const routes = function (app) {
   app.use("/unvfd", unvfdCategoryRouter);
   app.use("/unvfd", productFetcher);
   app.use("/user", paymentRouter);
+  app.use("/user", stripeRouter);
 
   // Verification Routes
   app.use("/user", jwtVerification, reviewRouter);
