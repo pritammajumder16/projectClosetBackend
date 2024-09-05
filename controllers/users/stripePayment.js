@@ -6,15 +6,34 @@ const {
 } = require("../../utils/responseFunctions");
 const router = require("express").Router();
 const stripe = new Stripe(credentials.STRIPE_SECRET_KEY);
-const calculateAmount = require("../../utils/calculateAmount");
-router.post("/stripe-create-payment-intent", async (req, res) => {
+router.post("/stripe-create-checkout-session", async (req, res) => {
   try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: calculateAmount(req.body.products),
-      currency: "inr",
+    const products = req.body.products;
+    const customer = await stripe.customers.create({
+      email: req.body.email,
     });
-    console.log(paymentIntent.client_secret);
-    return sendDataSuccess(res, { clientSecret: paymentIntent.client_secret });
+
+    const lineItems = products.map((product) => ({
+      price_data: {
+        currency: "inr",
+        product_data: {
+          name: product.productName,
+          description: product.description,
+        },
+        unit_amount: product.price * 100,
+      },
+      quantity: product.quantity,
+    }));
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: lineItems,
+      mode: "payment",
+      customer: customer.id,
+      success_url: credentials.FRONTEND_ENDPOINT + "payment-success",
+      cancel_url: credentials.FRONTEND_ENDPOINT + "payment-cancel",
+    });
+    return sendDataSuccess(res, { session });
   } catch (error) {
     console.log("error", error);
     return raiseError(res, error);
