@@ -4,7 +4,7 @@ const categoryModel = require("../../models/category");
 const { sequences, sequenceGet } = require("../../utils/sequences");
 
 // Route to create or update a category
-categoryRouter.get("/category", async (req, res, next) => {
+categoryRouter.get("/", async (req, res, next) => {
   try {
     const { categoryName, categoryId } = req.query;
 

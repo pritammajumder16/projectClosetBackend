@@ -6,7 +6,7 @@ const pageInfoModel = require("../../models/infoPage");
 
 const pageInfoRouter = require("express").Router();
 
-pageInfoRouter.post("/pageInfo", async (req, res, next) => {
+pageInfoRouter.post("/", async (req, res, next) => {
   try {
     const { html, name } = req.body;
 
@@ -39,7 +39,7 @@ pageInfoRouter.post("/pageInfo", async (req, res, next) => {
   }
 });
 
-pageInfoRouter.get("/pageInfo", async (req, res, next) => {
+pageInfoRouter.get("/", async (req, res, next) => {
   try {
     const { name } = req.query;
 

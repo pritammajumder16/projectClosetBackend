@@ -40,9 +40,9 @@ const routes = function (app) {
   app.use("/admin", jwtVerification);
   app.use("/admin/category", categoryRouter);
   app.use("/admin/allCategories", allCategoryRouter);
-  app.use("/admin/productUpload", productUpload);
+  app.use("/admin", productUpload);
   app.use("/admin/fetchFiles", fetchFiles);
-  app.use("/admin/userRoleUpdate", userRoleUpdate);
+  app.use("/admin", userRoleUpdate);
   app.use("/admin/pageInfo", pageInfoRouter);
 
   // Error Handling Middleware

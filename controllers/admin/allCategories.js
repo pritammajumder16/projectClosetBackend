@@ -3,7 +3,7 @@ const lib = require("../../utils/responseFunctions");
 const categoryModel = require("../../models/category");
 
 // Route to fetch all categories with pagination
-allCategoryRouter.get("/allCategories", async (req, res, next) => {
+allCategoryRouter.get("/", async (req, res, next) => {
   try {
     const { pageSize, pageIndex } = req.query;
 

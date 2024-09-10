@@ -3,11 +3,12 @@ const {
   sendDataSuccess,
   raiseError,
 } = require("../../utils/responseFunctions");
-const orderModel = require("../../models/orderModel").default;
+const orderModel = require("../../models/orderModel");
 
 orderRouter.get("/getOrders", async (req, res, next) => {
   try {
     if (req.query.email) {
+      console.log({ createdBy: req.query.email });
       const finalResult = await orderModel.find({ createdBy: req.query.email });
       return sendDataSuccess(res, finalResult);
     } else if (req.query.pageIndex && req.query.pageSize) {

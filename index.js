@@ -46,8 +46,12 @@ if (cluster.isMaster) {
     res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE, PUT");
     res.set(
       "Access-Control-Allow-Headers",
-      "Content-Type, authorization, Accept, User-Agent, requestedby"
+      "Content-Type, authorization, Accept, User-Agent, requestedby, Authorization"
     );
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(204);
+    }
+
     next();
   });
 

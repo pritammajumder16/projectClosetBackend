@@ -5,7 +5,7 @@ const {
 
 const fetchFiles = require("express").Router();
 
-fetchFiles.get("/fetchFiles", async (req, res, next) => {
+fetchFiles.get("/", async (req, res, next) => {
   try {
     // Check if 'files' query parameter is present
     if (!req.query.files) {

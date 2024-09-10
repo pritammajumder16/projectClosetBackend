@@ -4,7 +4,7 @@ const codes = {
   3: 500, //internal server error
 };
 const raiseError = (res, data) => {
-  return res.status(500).json({ success: false, data });
+  return res.status(400).json({ success: false, data });
 };
 const sendDataSuccess = (res, data, code = 1, success = true) => {
   return res.status(codes[code]).json({ success, data });
